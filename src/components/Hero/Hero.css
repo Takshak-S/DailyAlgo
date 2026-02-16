@@ -1,0 +1,81 @@
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 60vh;
+  background: #fff;
+  color: #232946;
+  padding: 3rem 2rem;
+  border-bottom: solid 1px #ccc;
+  margin: 0;
+  padding: 0 50px;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3a86ff;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.3rem;
+  color: #444b5a;
+  margin-bottom: 2rem;
+}
+
+.hero-btn {
+  background: #3a86ff;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-right: 1rem;
+}
+
+.btn-2 {
+  color: #3a86ff;
+  border: solid 2px #3a86ff;
+  background-color: white;
+}
+
+.hero-btn:hover {
+  background: #185cbb;
+}
+
+.btn-2:hover {
+  background: #3a86ff;
+  color: white;
+}
+
+.call-to-action {
+  max-width: 50%;
+}
+
+.hero-image {
+  max-width: 50%;
+}
+
+img {
+  max-width: 40vw;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  margin-left: 2rem;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  img {
+    margin: 2rem 0 0 0;
+    width: 80vw;
+    max-width: 400px;
+  }
+}

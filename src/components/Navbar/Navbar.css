@@ -1,0 +1,20 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.navbar-links-container {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.navbar-link a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-family: "Arial", sans-serif;
+}

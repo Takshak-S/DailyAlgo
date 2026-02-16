@@ -1,24 +1,22 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar.jsx";
+import Home from "./pages/Home/Home.jsx";
+import Problems from "./pages/Problems/Problems.jsx";
+import Practice from "./pages/Practice/Practice.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
+import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import "./App.css";
-import mockdata from "../leetcode1.json";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export default function App() {
   return (
-    <>
-      {mockdata.slice().map((item) => {
-        return (
-          <div key={item.id}>
-            <h2>{item.title}</h2>
-            <p>{item.problem_description}</p>
-          </div>
-        );
-      })}
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/problems" element={<Problems />} />
+        <Route path="/practice" element={<Practice />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
