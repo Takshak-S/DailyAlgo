@@ -1,7 +1,22 @@
 body {
-  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
 
 * {
   font-family: "Arial", sans-serif;
+}
+
+:root {
+  --bg-main: #020617; /* main background */
+  --bg-section: #020617; /* section background */
+  --bg-card: #020617; /* cards */
+  --border-subtle: #1e293b;
+
+  --text-primary: #e5e7eb; /* headings */
+  --text-secondary: #94a3b8; /* paragraphs */
+
+  --accent-blue: #3b82f6; /* buttons / links */
+  --accent-green: #22c55e;
+  --accent-red: #ef4444;
 }

@@ -2,8 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 50px;
-  border-bottom: 1px solid #ccc;
+  padding: 18px 56px;
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.18),
+    0 1.5px 8px 0 rgba(31, 38, 135, 0.1);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-radius: 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  outline: 1.5px solid rgba(200, 200, 255, 0.1);
+  z-index: 1000;
+  transition:
+    box-shadow 0.3s,
+    background 0.3s;
 }
 
 .navbar-links-container {
@@ -14,7 +31,17 @@
 
 .navbar-link a {
   text-decoration: none;
-  color: black;
+  color: #006eff;
   font-weight: bold;
   font-family: "Arial", sans-serif;
+  padding: 8px 18px;
+  border-radius: 12px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.navbar-link a:hover {
+  background: rgba(255, 255, 255, 0.4);
+  color: #0077ff;
 }
