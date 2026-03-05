@@ -1,5 +1,6 @@
 import heroImage from "../../assets/hero-image.png";
 import "./Hero.css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -15,8 +16,12 @@ export default function Home() {
         </p>
 
         <div className="hero-btn-container">
-          <button className="hero-btn">Practice</button>
-          <button className="hero-btn btn-2">View Problems</button>
+          <Link to="/practice">
+            <button className="hero-btn">Practice</button>
+          </Link>
+          <Link to="/problems">
+            <button className="hero-btn btn-2">View Problems</button>
+          </Link>
         </div>
       </div>
 

@@ -1,37 +1,51 @@
 .why-planner {
-  padding: 80px 10%;
-  background-color: white; /* dark theme friendly */
-  color: #e5e7eb;
+  padding: 100px 10%;
+  background: var(--bg-section);
+  position: relative;
 }
 
 .why-title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 50px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .why-container {
   display: flex;
-  gap: 40px;
+  gap: 32px;
   justify-content: center;
-  align-items: flex-start;
+  align-items: stretch;
   flex-wrap: wrap;
 }
 
 .why-box {
   flex: 1;
   min-width: 280px;
-  max-width: 420px;
-  padding: 30px;
-  border-radius: 12px;
-  background-color: #020617;
-  border: 1px solid #1e293b;
+  max-width: 440px;
+  padding: 36px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
+}
+
+.why-box:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-glow);
 }
 
 .why-box h3 {
-  font-size: 1.25rem;
-  margin-bottom: 16px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .why-box ul {
@@ -40,45 +54,43 @@
 }
 
 .why-box li {
-  margin-bottom: 12px;
-  line-height: 1.6;
+  margin-bottom: 14px;
+  line-height: 1.7;
   position: relative;
-  padding-left: 20px;
+  padding-left: 26px;
+  font-size: 0.95rem;
+}
+
+.problem h3 {
+  color: var(--accent-red) !important;
 }
 
 .problem li::before {
   content: "✕";
   position: absolute;
   left: 0;
-  color: #ef4444;
+  color: var(--accent-red);
+  font-weight: 700;
+}
+
+.solution h3 {
+  color: var(--accent-green) !important;
 }
 
 .solution li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #22c55e;
+  color: var(--accent-green);
+  font-weight: 700;
 }
 
-.why-planner {
-  padding: 80px 10%;
-  background-color: var(--bg-section);
-}
+@media (max-width: 768px) {
+  .why-planner {
+    padding: 60px 6%;
+  }
 
-.why-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 50px;
-  color: var(--text-primary);
-}
-
-.why-box {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
-}
-
-.why-box h3 {
-  color: var(--text-primary);
+  .why-title {
+    font-size: 1.7rem;
+  }
 }

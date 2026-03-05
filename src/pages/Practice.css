@@ -1,0 +1,323 @@
+.practice-page {
+  padding: 32px 5%;
+  min-height: calc(100vh - 72px);
+  background: var(--bg-main);
+  animation: fadeIn 0.4s ease;
+}
+
+.practice-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.practice-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 6px;
+  margin-bottom: 32px;
+}
+
+/* ===== STATS OVERVIEW ===== */
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.stat-total .stat-icon { color: var(--accent-primary); }
+.stat-easy .stat-icon { color: var(--accent-green); }
+.stat-medium .stat-icon { color: var(--accent-amber); }
+.stat-hard .stat-icon { color: var(--accent-red); }
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.stat-total-num {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.stat-progress-ring {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.1);
+  border: 2px solid var(--accent-primary);
+}
+
+.stat-progress-ring span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.stat-bar {
+  margin-left: auto;
+  width: 80px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: rgba(31, 36, 64, 0.5);
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+.stat-bar-fill.easy { background: var(--accent-green); }
+.stat-bar-fill.medium { background: var(--accent-amber); }
+.stat-bar-fill.hard { background: var(--accent-red); }
+
+/* ===== TOPICS ===== */
+.topics-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.topic-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 40px;
+}
+
+.topic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+.topic-card:hover {
+  border-color: rgba(20, 184, 166, 0.2);
+}
+
+.topic-card.expanded {
+  border-color: var(--border-glow);
+}
+
+.topic-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.topic-card-header:hover {
+  background: rgba(20, 184, 166, 0.03);
+}
+
+.topic-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.topic-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.topic-count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.topic-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topic-progress-bar {
+  width: 120px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: rgba(31, 36, 64, 0.5);
+  overflow: hidden;
+}
+
+.topic-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  transition: width 0.5s ease;
+}
+
+.topic-pct {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.topic-chevron {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* ===== EXPANDED PROBLEM LIST ===== */
+.topic-problems {
+  border-top: 1px solid var(--border-subtle);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.topic-problem-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  border-bottom: 1px solid rgba(31, 36, 64, 0.2);
+  transition: background var(--transition-fast);
+}
+
+.topic-problem-row:hover {
+  background: rgba(20, 184, 166, 0.04);
+}
+
+.topic-problem-row.solved {
+  opacity: 0.5;
+}
+
+.solve-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-subtle);
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  font-size: 0.55rem;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.solve-btn-sm:hover {
+  border-color: var(--accent-green);
+  color: rgba(52, 211, 153, 0.5);
+}
+
+.solve-btn-sm.solved {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.tp-title {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.tp-badge {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.tp-easy {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--accent-green);
+}
+.tp-medium {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--accent-amber);
+}
+.tp-hard {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--accent-red);
+}
+
+.tp-link {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  transition: color var(--transition-fast);
+}
+
+.tp-link:hover {
+  color: var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+  .practice-page {
+    padding: 20px 3%;
+  }
+
+  .practice-title {
+    font-size: 1.5rem;
+  }
+
+  .stats-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .topic-progress-bar {
+    width: 60px;
+  }
+
+  .topic-card-header {
+    padding: 14px 16px;
+  }
+
+  .topic-problem-row {
+    padding: 8px 16px;
+  }
+}

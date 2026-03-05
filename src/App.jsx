@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import Home from "./pages/Home/Home.jsx";
-import Problems from "./pages/Problems/Problems.jsx";
-import Practice from "./pages/Practice/Practice.jsx";
-import Profile from "./pages/Profile/Profile.jsx";
-import LandingPage from "./pages/LandingPage/LandingPage.jsx";
+import Home from "./pages/Home.jsx";
+import Problems from "./pages/Problems.jsx";
+import Practice from "./pages/Practice.jsx";
+import Profile from "./pages/Profile.jsx";
+import Footer from "./components/Footer/Footer";
 import "./App.css";
 
 export default function App() {
@@ -17,6 +17,7 @@ export default function App() {
         <Route path="/practice" element={<Practice />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

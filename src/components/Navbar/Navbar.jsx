@@ -1,22 +1,26 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FaCode } from "react-icons/fa";
 import "./Navbar.css";
 
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <div className="navbar-title">LeetCode Practice Planner</div>
+      <NavLink to="/" className="navbar-brand">
+        <FaCode className="navbar-logo-icon" />
+        <span className="navbar-title">DailyAlgo</span>
+      </NavLink>
       <ul className="navbar-links-container">
         <li className="navbar-link">
-          <Link to="/">Home</Link>
+          <NavLink to="/" end>Home</NavLink>
         </li>
         <li className="navbar-link">
-          <Link to="/problems">Problems</Link>
+          <NavLink to="/problems">Problems</NavLink>
         </li>
         <li className="navbar-link">
-          <Link to="/practice">Practice</Link>
+          <NavLink to="/practice">Practice</NavLink>
         </li>
         <li className="navbar-link">
-          <Link to="/profile">Profile</Link>
+          <NavLink to="/profile">Profile</NavLink>
         </li>
       </ul>
     </nav>

@@ -1,22 +1,122 @@
+/* ===== CSS VARIABLES / DESIGN TOKENS ===== */
+:root {
+  --bg-main: #0b0d17;
+  --bg-section: #0e1122;
+  --bg-card: #141829;
+  --bg-card-hover: #1a1f36;
+  --bg-glass: rgba(20, 24, 41, 0.65);
+  --border-subtle: #1f2440;
+  --border-glow: rgba(20, 184, 166, 0.35);
+
+  --text-primary: #e8ecf4;
+  --text-secondary: #8b92a8;
+  --text-muted: #585f78;
+
+  --accent-primary: #14b8a6;
+  --accent-primary-hover: #0d9488;
+  --accent-secondary: #a78bfa;
+  --accent-green: #34d399;
+  --accent-amber: #fbbf24;
+  --accent-red: #f87171;
+  --accent-purple: #a78bfa;
+
+  --gradient-primary: linear-gradient(135deg, #14b8a6, #a78bfa);
+  --gradient-secondary: linear-gradient(135deg, #34d399, #06b6d4);
+  --gradient-hero: linear-gradient(135deg, #14b8a6 0%, #a78bfa 50%, #f472b6 100%);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px rgba(20, 184, 166, 0.15);
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+/* ===== GLOBAL RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: var(--bg-main);
+  color: var(--text-primary);
+  padding-top: 72px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: rgba(20, 184, 166, 0.3);
   color: var(--text-primary);
 }
 
-* {
-  font-family: "Arial", sans-serif;
+/* ===== UTILITY ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-:root {
-  --bg-main: #020617; /* main background */
-  --bg-section: #020617; /* section background */
-  --bg-card: #020617; /* cards */
-  --border-subtle: #1e293b;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
-  --text-primary: #e5e7eb; /* headings */
-  --text-secondary: #94a3b8; /* paragraphs */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
 
-  --accent-blue: #3b82f6; /* buttons / links */
-  --accent-green: #22c55e;
-  --accent-red: #ef4444;
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(20, 184, 166, 0.2); }
+  50% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.4); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

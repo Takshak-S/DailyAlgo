@@ -1,54 +1,90 @@
 .how-it-works {
-  padding: 80px 10%;
-  background-color: var(--bg-main);
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 100px 10%;
+  background: var(--bg-main);
+  position: relative;
 }
 
 .how-title {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 60px;
+  margin-bottom: 70px;
+  letter-spacing: -0.02em;
 }
 
 .steps-container {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .step-card {
-  background-color: var(--bg-card);
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-subtle);
-  border-radius: 14px;
-  padding: 30px;
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
   max-width: 320px;
   text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-glow);
 }
 
 .step-number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background-color: var(--accent-blue);
+  background: var(--gradient-primary);
   color: white;
   font-weight: 700;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
 }
 
 .step-card h3 {
   color: var(--text-primary);
-  font-size: 1.2rem;
-  margin-bottom: 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 
 .step-card p {
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .how-it-works {
+    padding: 60px 6%;
+  }
+
+  .how-title {
+    font-size: 1.7rem;
+  }
+
+  .steps-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-card {
+    max-width: 100%;
+  }
 }
