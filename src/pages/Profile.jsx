@@ -1,19 +1,11 @@
 import { useState, useMemo } from "react";
 import { FaTrophy, FaChartBar, FaTrashAlt, FaMedal, FaStar, FaBolt } from "react-icons/fa";
+import useSolvedProblems from "../hooks/useSolvedProblems";
 import problemsData from "../../leetcode1.json";
 import "./Profile.css";
 
-function getSolvedSet() {
-  try {
-    const data = localStorage.getItem("solvedProblems");
-    return data ? new Set(JSON.parse(data)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
 export default function Profile() {
-  const [solved, setSolved] = useState(getSolvedSet);
+  const { solved, resetAll } = useSolvedProblems();
   const [showConfirm, setShowConfirm] = useState(false);
 
   const stats = useMemo(() => {
@@ -22,7 +14,6 @@ export default function Profile() {
     const easy = { total: 0, solved: 0 };
     const medium = { total: 0, solved: 0 };
     const hard = { total: 0, solved: 0 };
-
     const topicMap = {};
 
     problemsData.forEach((p) => {
@@ -52,8 +43,7 @@ export default function Profile() {
   }, [solved]);
 
   const handleReset = () => {
-    localStorage.removeItem("solvedProblems");
-    setSolved(new Set());
+    resetAll();
     setShowConfirm(false);
   };
 
@@ -66,7 +56,6 @@ export default function Profile() {
         <p className="profile-subtitle">Overview of your LeetCode practice progress</p>
       </div>
 
-      {/* Overall Progress Card */}
       <div className="overall-card">
         <div className="overall-left">
           <FaTrophy className="overall-icon" />
@@ -77,7 +66,7 @@ export default function Profile() {
         </div>
         <div className="overall-ring">
           <svg viewBox="0 0 100 100" className="ring-svg">
-            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(30,41,59,0.5)" strokeWidth="8" />
+            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(31,36,64,0.5)" strokeWidth="8" />
             <circle
               cx="50" cy="50" r="42"
               fill="none"
@@ -99,7 +88,6 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Difficulty Breakdown */}
       <div className="difficulty-grid">
         <div className="diff-card diff-easy">
           <FaStar className="diff-icon" />
@@ -133,7 +121,6 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Topic Breakdown */}
       <div className="topic-breakdown">
         <h2 className="section-title">
           <FaChartBar className="section-icon" /> Topic Progress
@@ -152,7 +139,6 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* Reset */}
       <div className="reset-section">
         {!showConfirm ? (
           <button className="reset-btn" onClick={() => setShowConfirm(true)}>

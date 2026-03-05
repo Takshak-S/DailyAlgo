@@ -1,11 +1,13 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
-import { FaSearch, FaExternalLinkAlt, FaCheck, FaSortUp, FaSortDown, FaSort, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useState, useMemo, useEffect } from "react";
+import { FaSearch, FaExternalLinkAlt, FaSortUp, FaSortDown, FaSort, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import useSolvedProblems from "../hooks/useSolvedProblems";
+import DifficultyBadge from "../components/DifficultyBadge";
+import SolveButton from "../components/SolveButton";
 import problemsData from "../../leetcode1.json";
 import "./Problems.css";
 
 const ITEMS_PER_PAGE = 50;
 
-// Extract unique topics from the data
 const allTopics = (() => {
   const topicSet = new Set();
   problemsData.forEach((p) => {
@@ -24,66 +26,33 @@ const allTopics = (() => {
 
 const DIFFICULTIES = ["Easy", "Medium", "Hard"];
 
-function getSolvedSet() {
-  try {
-    const data = localStorage.getItem("solvedProblems");
-    return data ? new Set(JSON.parse(data)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-function saveSolvedSet(solvedSet) {
-  localStorage.setItem("solvedProblems", JSON.stringify([...solvedSet]));
-}
-
 export default function Problems() {
   const [search, setSearch] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: "id", direction: "asc" });
   const [currentPage, setCurrentPage] = useState(1);
-  const [solved, setSolved] = useState(getSolvedSet);
+  const { solved, toggleSolved } = useSolvedProblems();
 
-  // Persist solved state
-  useEffect(() => {
-    saveSolvedSet(solved);
-  }, [solved]);
-
-  const toggleSolved = useCallback((id) => {
-    setSolved((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
-  }, []);
-
-  const handleSort = useCallback((key) => {
+  const handleSort = (key) => {
     setSortConfig((prev) => ({
       key,
       direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
     }));
-  }, []);
+  };
 
   const filteredData = useMemo(() => {
     let result = problemsData;
 
-    // Filter by search
     if (search.trim()) {
       const q = search.toLowerCase();
       result = result.filter((p) => p.title.toLowerCase().includes(q));
     }
 
-    // Filter by difficulty
     if (selectedDifficulty) {
       result = result.filter((p) => p.difficulty === selectedDifficulty);
     }
 
-    // Filter by topic
     if (selectedTopic) {
       result = result.filter((p) => {
         if (!p.topic_tags) return false;
@@ -92,21 +61,15 @@ export default function Problems() {
       });
     }
 
-    // Sort
     result = [...result].sort((a, b) => {
       const dir = sortConfig.direction === "asc" ? 1 : -1;
       const key = sortConfig.key;
-
-      if (key === "title") {
-        return dir * a.title.localeCompare(b.title);
-      }
+      if (key === "title") return dir * a.title.localeCompare(b.title);
       if (key === "difficulty") {
         const order = { Easy: 1, Medium: 2, Hard: 3 };
         return dir * ((order[a.difficulty] || 0) - (order[b.difficulty] || 0));
       }
-      if (key === "acceptance") {
-        return dir * ((a.acceptance || 0) - (b.acceptance || 0));
-      }
+      if (key === "acceptance") return dir * ((a.acceptance || 0) - (b.acceptance || 0));
       return dir * (a.id - b.id);
     });
 
@@ -119,7 +82,6 @@ export default function Problems() {
     currentPage * ITEMS_PER_PAGE
   );
 
-  // Reset page on filter change
   useEffect(() => {
     setCurrentPage(1);
   }, [search, selectedDifficulty, selectedTopic]);
@@ -133,21 +95,15 @@ export default function Problems() {
     );
   };
 
-  const solvedCount = solved.size;
-  const totalCount = problemsData.length;
-
   return (
     <div className="problems-page">
       <div className="problems-header">
-        <div>
-          <h1 className="problems-title">Problems</h1>
-          <p className="problems-subtitle">
-            {filteredData.length} problems found • {solvedCount} / {totalCount} solved
-          </p>
-        </div>
+        <h1 className="problems-title">Problems</h1>
+        <p className="problems-subtitle">
+          {filteredData.length} problems found • {solved.size} / {problemsData.length} solved
+        </p>
       </div>
 
-      {/* Filters Bar */}
       <div className="filters-bar">
         <div className="search-wrapper">
           <FaSearch className="search-icon" />
@@ -180,15 +136,12 @@ export default function Problems() {
           >
             <option value="">All Topics</option>
             {allTopics.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
+              <option key={t} value={t}>{t}</option>
             ))}
           </select>
         </div>
       </div>
 
-      {/* Problems Table */}
       <div className="table-container">
         <table className="problems-table">
           <thead>
@@ -219,20 +172,12 @@ export default function Problems() {
               return (
                 <tr key={problem.id} className={isSolved ? "row-solved" : ""}>
                   <td className="td-status">
-                    <button
-                      className={`solve-btn ${isSolved ? "solved" : ""}`}
-                      onClick={() => toggleSolved(problem.id)}
-                      title={isSolved ? "Mark unsolved" : "Mark solved"}
-                    >
-                      <FaCheck />
-                    </button>
+                    <SolveButton isSolved={isSolved} onToggle={() => toggleSolved(problem.id)} />
                   </td>
                   <td className="td-id">{problem.id}</td>
                   <td className="td-title">{problem.title}</td>
                   <td className="td-difficulty">
-                    <span className={`badge badge-${problem.difficulty?.toLowerCase()}`}>
-                      {problem.difficulty}
-                    </span>
+                    <DifficultyBadge difficulty={problem.difficulty} />
                   </td>
                   <td className="td-acceptance">
                     {problem.acceptance != null ? `${problem.acceptance}%` : "—"}
@@ -256,13 +201,7 @@ export default function Problems() {
                   </td>
                   <td className="td-link">
                     {problem.problem_URL && (
-                      <a
-                        href={problem.problem_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="link-btn"
-                        title="Open on LeetCode"
-                      >
+                      <a href={problem.problem_URL} target="_blank" rel="noopener noreferrer" className="link-btn" title="Open on LeetCode">
                         <FaExternalLinkAlt />
                       </a>
                     )}
@@ -274,64 +213,35 @@ export default function Problems() {
         </table>
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="pagination">
-          <button
-            className="page-btn"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => p - 1)}
-          >
+          <button className="page-btn" disabled={currentPage === 1} onClick={() => setCurrentPage((p) => p - 1)}>
             <FaChevronLeft />
           </button>
-
           <div className="page-numbers">
             {(() => {
               const pages = [];
               const maxVisible = 7;
               let start = Math.max(1, currentPage - 3);
               let end = Math.min(totalPages, start + maxVisible - 1);
-              if (end - start < maxVisible - 1) {
-                start = Math.max(1, end - maxVisible + 1);
-              }
-
+              if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
               if (start > 1) {
-                pages.push(
-                  <button key={1} className="page-num" onClick={() => setCurrentPage(1)}>1</button>
-                );
+                pages.push(<button key={1} className="page-num" onClick={() => setCurrentPage(1)}>1</button>);
                 if (start > 2) pages.push(<span key="dots1" className="page-dots">…</span>);
               }
-
               for (let i = start; i <= end; i++) {
                 pages.push(
-                  <button
-                    key={i}
-                    className={`page-num ${currentPage === i ? "active" : ""}`}
-                    onClick={() => setCurrentPage(i)}
-                  >
-                    {i}
-                  </button>
+                  <button key={i} className={`page-num ${currentPage === i ? "active" : ""}`} onClick={() => setCurrentPage(i)}>{i}</button>
                 );
               }
-
               if (end < totalPages) {
                 if (end < totalPages - 1) pages.push(<span key="dots2" className="page-dots">…</span>);
-                pages.push(
-                  <button key={totalPages} className="page-num" onClick={() => setCurrentPage(totalPages)}>
-                    {totalPages}
-                  </button>
-                );
+                pages.push(<button key={totalPages} className="page-num" onClick={() => setCurrentPage(totalPages)}>{totalPages}</button>);
               }
-
               return pages;
             })()}
           </div>
-
-          <button
-            className="page-btn"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((p) => p + 1)}
-          >
+          <button className="page-btn" disabled={currentPage === totalPages} onClick={() => setCurrentPage((p) => p + 1)}>
             <FaChevronRight />
           </button>
         </div>

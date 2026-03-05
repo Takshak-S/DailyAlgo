@@ -1,39 +1,15 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
-import { FaCheck, FaChevronDown, FaChevronUp, FaExternalLinkAlt, FaTrophy, FaBookOpen, FaFire } from "react-icons/fa";
+import { useState, useMemo } from "react";
+import { FaChevronDown, FaChevronUp, FaExternalLinkAlt, FaTrophy, FaBookOpen, FaFire } from "react-icons/fa";
+import useSolvedProblems from "../hooks/useSolvedProblems";
+import DifficultyBadge from "../components/DifficultyBadge";
+import SolveButton from "../components/SolveButton";
 import problemsData from "../../leetcode1.json";
 import "./Practice.css";
 
-function getSolvedSet() {
-  try {
-    const data = localStorage.getItem("solvedProblems");
-    return data ? new Set(JSON.parse(data)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-function saveSolvedSet(solvedSet) {
-  localStorage.setItem("solvedProblems", JSON.stringify([...solvedSet]));
-}
-
 export default function Practice() {
-  const [solved, setSolved] = useState(getSolvedSet);
+  const { solved, toggleSolved } = useSolvedProblems();
   const [expandedTopic, setExpandedTopic] = useState(null);
 
-  useEffect(() => {
-    saveSolvedSet(solved);
-  }, [solved]);
-
-  const toggleSolved = useCallback((id) => {
-    setSolved((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  }, []);
-
-  // Group problems by topic
   const topicGroups = useMemo(() => {
     const groups = {};
     problemsData.forEach((p) => {
@@ -68,7 +44,6 @@ export default function Practice() {
       <h1 className="practice-title">Practice Dashboard</h1>
       <p className="practice-subtitle">Track your progress across topics and difficulties</p>
 
-      {/* Stats Overview */}
       <div className="stats-overview">
         <div className="stat-card stat-total">
           <FaTrophy className="stat-icon" />
@@ -112,7 +87,6 @@ export default function Practice() {
         </div>
       </div>
 
-      {/* Topic Cards */}
       <h2 className="topics-heading">Topics</h2>
       <div className="topic-cards">
         {topicGroups.map((group) => {
@@ -120,20 +94,14 @@ export default function Practice() {
           const isExpanded = expandedTopic === group.name;
           return (
             <div key={group.name} className={`topic-card ${isExpanded ? "expanded" : ""}`}>
-              <div
-                className="topic-card-header"
-                onClick={() => setExpandedTopic(isExpanded ? null : group.name)}
-              >
+              <div className="topic-card-header" onClick={() => setExpandedTopic(isExpanded ? null : group.name)}>
                 <div className="topic-info">
                   <h3 className="topic-name">{group.name}</h3>
                   <span className="topic-count">{group.solved} / {group.total} solved</span>
                 </div>
                 <div className="topic-right">
                   <div className="topic-progress-bar">
-                    <div
-                      className="topic-progress-fill"
-                      style={{ width: `${pct}%` }}
-                    ></div>
+                    <div className="topic-progress-fill" style={{ width: `${pct}%` }}></div>
                   </div>
                   <span className="topic-pct">{pct}%</span>
                   {isExpanded ? <FaChevronUp className="topic-chevron" /> : <FaChevronDown className="topic-chevron" />}
@@ -145,14 +113,9 @@ export default function Practice() {
                     const isSolved = solved.has(p.id);
                     return (
                       <div key={p.id} className={`topic-problem-row ${isSolved ? "solved" : ""}`}>
-                        <button
-                          className={`solve-btn-sm ${isSolved ? "solved" : ""}`}
-                          onClick={() => toggleSolved(p.id)}
-                        >
-                          <FaCheck />
-                        </button>
+                        <SolveButton isSolved={isSolved} onToggle={() => toggleSolved(p.id)} size="sm" />
                         <span className="tp-title">{p.title}</span>
-                        <span className={`tp-badge tp-${p.difficulty?.toLowerCase()}`}>{p.difficulty}</span>
+                        <DifficultyBadge difficulty={p.difficulty} />
                         {p.problem_URL && (
                           <a href={p.problem_URL} target="_blank" rel="noopener noreferrer" className="tp-link">
                             <FaExternalLinkAlt />

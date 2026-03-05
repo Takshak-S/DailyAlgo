@@ -19,7 +19,6 @@
   margin-bottom: 32px;
 }
 
-/* ===== STATS OVERVIEW ===== */
 .stats-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -113,7 +112,6 @@
 .stat-bar-fill.medium { background: var(--accent-amber); }
 .stat-bar-fill.hard { background: var(--accent-red); }
 
-/* ===== TOPICS ===== */
 .topics-heading {
   font-size: 1.5rem;
   font-weight: 700;
@@ -209,7 +207,6 @@
   font-size: 0.75rem;
 }
 
-/* ===== EXPANDED PROBLEM LIST ===== */
 .topic-problems {
   border-top: 1px solid var(--border-subtle);
   max-height: 400px;

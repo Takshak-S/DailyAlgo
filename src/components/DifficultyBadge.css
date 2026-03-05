@@ -1,0 +1,23 @@
+.diff-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.diff-badge-easy {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--accent-green);
+}
+
+.diff-badge-medium {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--accent-amber);
+}
+
+.diff-badge-hard {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--accent-red);
+}

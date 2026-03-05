@@ -1,0 +1,33 @@
+.solve-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--border-subtle);
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.solve-toggle:hover {
+  border-color: var(--accent-green);
+  color: rgba(52, 211, 153, 0.5);
+}
+
+.solve-toggle.solved {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.solve-toggle-sm {
+  width: 24px;
+  height: 24px;
+  border-width: 1.5px;
+  font-size: 0.55rem;
+}

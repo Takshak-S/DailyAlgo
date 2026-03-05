@@ -5,7 +5,6 @@
   animation: fadeIn 0.4s ease;
 }
 
-/* ===== HEADER ===== */
 .problems-header {
   margin-bottom: 28px;
 }
@@ -23,7 +22,6 @@
   margin-top: 6px;
 }
 
-/* ===== FILTERS BAR ===== */
 .filters-bar {
   display: flex;
   align-items: center;
@@ -82,7 +80,6 @@
   flex-wrap: wrap;
 }
 
-/* ===== DIFFICULTY CHIPS ===== */
 .difficulty-chips {
   display: flex;
   gap: 8px;
@@ -135,7 +132,6 @@
   border-color: var(--accent-red);
 }
 
-/* ===== TOPIC SELECT ===== */
 .topic-select {
   padding: 9px 14px;
   background: rgba(11, 13, 23, 0.7);
@@ -159,7 +155,6 @@
   color: var(--text-primary);
 }
 
-/* ===== TABLE ===== */
 .table-container {
   overflow-x: auto;
   border: 1px solid var(--border-subtle);
@@ -234,7 +229,6 @@
   color: var(--text-muted);
 }
 
-/* ===== STATUS BUTTON ===== */
 .solve-btn {
   display: inline-flex;
   align-items: center;
@@ -261,7 +255,6 @@
   color: var(--accent-green);
 }
 
-/* ===== COLUMN WIDTHS ===== */
 .th-status,
 .td-status {
   width: 50px;
@@ -297,7 +290,6 @@
   text-align: center;
 }
 
-/* ===== BADGES ===== */
 .badge {
   display: inline-block;
   padding: 3px 12px;
@@ -321,7 +313,6 @@
   color: var(--accent-red);
 }
 
-/* ===== TOPIC TAGS ===== */
 .topic-tags {
   display: flex;
   flex-wrap: wrap;
@@ -351,7 +342,6 @@
   cursor: default;
 }
 
-/* ===== LINK BUTTON ===== */
 .link-btn {
   display: inline-flex;
   align-items: center;
@@ -365,7 +355,6 @@
   color: var(--accent-primary);
 }
 
-/* ===== PAGINATION ===== */
 .pagination {
   display: flex;
   align-items: center;
@@ -442,7 +431,6 @@
   padding: 0 4px;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .problems-page {
     padding: 20px 3%;
