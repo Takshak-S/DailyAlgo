@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-brand">
-          <h3>LeetCode Practice Planner</h3>
+          <h3>DailyAlgo</h3>
           <p>
             A frontend-only tool for structured and intentional DSA practice.
           </p>
@@ -49,7 +49,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} LeetCode Practice Planner</p>
+        <p>&copy; {new Date().getFullYear()} DailyAlgo</p>
       </div>
     </footer>
   );
