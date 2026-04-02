@@ -175,7 +175,7 @@ export default function Problems() {
                     <SolveButton isSolved={isSolved} onToggle={() => toggleSolved(problem.id)} />
                   </td>
                   <td className="td-id">{problem.id}</td>
-                  <td className="td-title">{problem.title}</td>
+                  <td className="td-title">{problem.title.split(".")[1]}</td>
                   <td className="td-difficulty">
                     <DifficultyBadge difficulty={problem.difficulty} />
                   </td>
